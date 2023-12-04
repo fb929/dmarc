@@ -23,7 +23,7 @@ import xmltodict
 import textwrap
 
 # !!!
-# you need enable access for "less secure apps"
+# for gmail you need enable access for "less secure apps"
 # https://support.google.com/a/answer/6260879?hl=en
 # !!!
 
@@ -49,6 +49,7 @@ cfg = {
         "reportsDir": "./tmp/reports",
     },
     "searchLimitDays": 30,
+    "inboxSelect": "INBOX",
     "skipDownloadReports": False,
 }
 
@@ -118,14 +119,6 @@ def process_record(record, sources, domains):
     count = int(record['row']['count'])
     policy_evaluated_dkim = record['row']['policy_evaluated']['dkim']
     policy_evaluated_spf = record['row']['policy_evaluated']['spf']
-
-    #if isinstance(record['auth_results']['spf'], list):
-    #    spf_domain = record['auth_results']['spf'][0]['domain']
-    #    spf_result = record['auth_results']['spf'][0]['result']
-    #else:
-    #    spf_domain = record['auth_results']['spf']['domain']
-    #    spf_result = record['auth_results']['spf']['result']
-    #spf_auth_result = spf_domain+":"+spf_result
 
     spf_auth_results = record['auth_results'].get('spf', None)
     if isinstance(spf_auth_results, dict):
@@ -248,7 +241,7 @@ def downloadReports():
         searchDate = monthAgo.strftime("%d-%b-%Y")
 
     # chouse inbox
-    mail.select("dmarc", readonly=True)
+    mail.select(cfg['inboxSelect'], readonly=True)
 
     # search emails
     if cfg['searchLimitDays']:

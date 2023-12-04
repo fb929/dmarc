@@ -5,6 +5,11 @@ download and analyze dmarc reports
 https://support.google.com/a/answer/6260879?hl=en
 
 ## usage
+### install pip modules
+```
+pip install -r requirements.txt
+```
+
 ### create config file ./.config.yaml
 ```
 email:
@@ -14,3 +19,4 @@ email:
 searchLimitDays: 30 # days for search limit. if not set, will download all emails
 inboxSelect: dmarc # inbox dir for search, by default "INBOX"
 ```
+### run ./dmarcReports.py

@@ -19,4 +19,8 @@ email:
 searchLimitDays: 30 # days for search limit. if not set, will download all emails
 inboxSelect: dmarc # inbox dir for search, by default "INBOX"
 ```
-### run ./dmarcReports.py
+### run
+```
+./dmarcReports.py
+```
+
